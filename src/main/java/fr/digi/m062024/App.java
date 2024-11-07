@@ -1,8 +1,6 @@
 package fr.digi.m062024;
 
-import fr.digi.m062024.bo.Adresse;
-import fr.digi.m062024.bo.Banque;
-import fr.digi.m062024.bo.Client;
+import fr.digi.m062024.bo.*;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -21,6 +19,8 @@ public class App {
 
         //Création de la banque
         Banque banque = new Banque("BNP");
+
+        client.setBanque(banque);
         banque.ajouterClient(client);
 
         //Création de deux clients
@@ -36,6 +36,14 @@ public class App {
         //Création des comptes
         System.out.println(banque.getClients());*/
 
+
+        //Création d'un compte courant
+        Compte compteJoint = new LivretA("CLI123456", 1000.0, 3.5);
+        Client sega = em.find(Client.class, 3);
+        Client nenette = em.find(Client.class, 2);
+        compteJoint.ajouterClient(sega);
+        compteJoint.ajouterClient(nenette);
+        em.persist(compteJoint);
 
         //Sélection des clients qui habitent Nantes
         TypedQuery<Banque> query = em.createQuery("select b from Banque b join b.clients c where c.adresse.codePostal = 'Nantes'", Banque.class);

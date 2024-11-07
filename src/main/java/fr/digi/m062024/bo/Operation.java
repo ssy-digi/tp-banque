@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "operation")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Operation implements Serializable {
 
     @Id
@@ -24,6 +25,13 @@ public class Operation implements Serializable {
     private Compte compte;
 
     public Operation() {
+    }
+
+    public Operation(LocalDateTime date, double montant, String motif, Compte compte) {
+        this.date = date;
+        this.montant = montant;
+        this.motif = motif;
+        this.compte = compte;
     }
 
     public Integer getId() {

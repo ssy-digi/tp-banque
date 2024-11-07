@@ -3,6 +3,7 @@ package fr.digi.m062024.bo;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,12 +27,14 @@ public class Client {
     @JoinColumn(name = "ID_BANQ")
     private Banque banque;
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "client_banque",
+    @JoinTable(name = "client_compte",
     joinColumns = @JoinColumn(name = "ID_CLIENT", referencedColumnName = "ID"),
     inverseJoinColumns = @JoinColumn(name = "ID_COMPTE", referencedColumnName = "ID"))
     private Set<Compte> comptes;
 
-
+    {
+        comptes = new HashSet<>();
+    }
     public Client() {
     }
 
@@ -110,6 +113,20 @@ public class Client {
 
     public void setComptes(Set<Compte> comptes) {
         this.comptes = comptes;
+    }
+
+    public void ajouterCompte(Compte compte) {
+        if (compte != null) {
+            this.comptes.add(compte);
+            compte.getClients().add(this);
+        }
+    }
+
+    public void retirerCompte(Compte compte) {
+        if (compte != null) {
+            this.comptes.remove(compte);
+            compte.getClients().remove(this);
+        }
     }
 
     @Override
