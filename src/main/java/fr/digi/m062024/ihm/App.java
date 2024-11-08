@@ -1,7 +1,9 @@
 package fr.digi.m062024.ihm;
 
 import fr.digi.m062024.bo.*;
+import fr.digi.m062024.dal.PersistenceManager;
 import jakarta.persistence.*;
+import org.mariadb.jdbc.util.StringUtils;
 
 import java.util.List;
 
@@ -9,10 +11,12 @@ public class App {
     public static void main(String[] args) {
 
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
+
+        EntityManagerFactory emf = PersistenceManager.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
+        EntityManagerFactory emf2 = PersistenceManager.getEntityManagerFactory();
        /* Client client = new Client("Toto", "Titi");
 
 
@@ -58,5 +62,9 @@ public class App {
         em.getTransaction().commit();
         em.close();
         emf.close();
+
+        try(EntityManager em2 = PersistenceManager.getEntityManagerFactory().createEntityManager()) {
+
+        }
     }
 }
