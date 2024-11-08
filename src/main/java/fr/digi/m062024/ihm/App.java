@@ -1,9 +1,8 @@
-package fr.digi.m062024;
+package fr.digi.m062024.ihm;
 
 import fr.digi.m062024.bo.*;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class App {
