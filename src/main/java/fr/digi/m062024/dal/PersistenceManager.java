@@ -1,6 +1,7 @@
 package fr.digi.m062024.dal;
 
 import jakarta.persistence.EntityManagerFactory;
+import java.time.LocalDate;
 import jakarta.persistence.Persistence;
 
 public final class PersistenceManager {
