@@ -1,5 +1,6 @@
 package fr.digi.m062024.dal;
 
+import java.time.LocalDate;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Query;
